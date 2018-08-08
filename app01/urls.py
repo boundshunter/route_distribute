@@ -18,6 +18,7 @@ from django.urls import path
 # from django.conf.urls import include
 from app01 import views
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
     path('login/', views.login),
+    path('orm/', views.orm),
 ]

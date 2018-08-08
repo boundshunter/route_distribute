@@ -19,6 +19,6 @@ from django.conf.urls import include
 
 from app02 import views
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
     path('login/', views.login),
 ]
