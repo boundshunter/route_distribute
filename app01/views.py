@@ -5,13 +5,45 @@ from app01 import models
 
 
 def login(request):
-    return HttpResponse('app01 login access')
+    print(request.method)
+    if request.method == 'GET':
+        return render(request, 'login.html')
+    elif request.method == 'POST':
+        u = request.POST.get('user')
+        p = request.POST.get('pwd')
+        print(u,p)
+        obj = models.UserInfo.objects.filter(username=u, password=p).first()
+        if obj:
+            return redirect("/app01/index/")
+        else:
+            return render(request,'login.html')
+    else:
+        return render(request,'login.html')
 
+
+def index(request):
+    return render(request, 'index.html')
+
+
+def user_info(request):
+    user_list = models.UserInfo.objects.all()
+    return render(request, 'user_info.html', {'user_list': user_list})
+
+def user_group(request):
+    pass
+
+
+def user_detail(request, nid):
+    # return HttpResponse(nid)
+    obj = models.UserInfo.objects.filter(id=nid).first()
+
+    # 取单挑数据，如果不存在直接报错， models.UserInfo.objects.get(id=nid),所以此方法需要 try
+    return render(request,'user_detail.html', {"obj": obj})
 
 def orm(request):
     # 创建数据 推荐使用 1,2
     # 1.
-    # models.UserInfo.objects.create(username='jfsu', password='abc123', gender='男', age='28')
+    models.UserInfo.objects.create(username='jfsu', password='abc123', gender='男', age='28')
     # 2.
     # dic = {'username': 'alex', 'password': '123', 'gender': '女', 'age': '38'}
     # models.UserInfo.objects.create(**dic)
