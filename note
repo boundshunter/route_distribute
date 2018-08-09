@@ -397,3 +397,4 @@
 											EmailValidator(message='又错误了', code='c3'), ]
 									)
 
+        django 外键的本质就是对象的封装，封装成字段，但是不显示，值显示ID
